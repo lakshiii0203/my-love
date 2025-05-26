@@ -4,74 +4,151 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Love Heart Animation</title>
+<title>Lakshi’s Love Message</title>
 <style>
+  /* Background color */
   body {
-    display: flex;
+    margin: 0;
     height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffd6e8, #ff9ac1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #b71c44;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #ffe6f0;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    text-align: center;
   }
+
+  /* Big glowing heart */
   .heart {
     position: relative;
-    width: 100px;
-    height: 90px;
+    width: 140px;
+    height: 130px;
     transform: rotate(-45deg);
-    animation: beat 1s infinite;
-    cursor: pointer;
+    animation: pulse 1.5s infinite ease-in-out;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 10px #ff5a8c);
+    cursor: default;
   }
   .heart::before,
   .heart::after {
     content: "";
     position: absolute;
-    width: 100px;
-    height: 90px;
-    background: #ff416c;
+    width: 140px;
+    height: 130px;
+    background: #ff2a6d;
     border-radius: 50%;
   }
   .heart::before {
     top: 0;
-    left: 50px;
+    left: 70px;
   }
   .heart::after {
-    top: -50px;
+    top: -70px;
     left: 0;
   }
   .heart div {
-    width: 100px;
-    height: 90px;
-    background: #ff416c;
+    width: 140px;
+    height: 130px;
+    background: #ff2a6d;
     position: absolute;
     top: 0;
     left: 0;
     border-radius: 50% 50% 0 0;
   }
-  @keyframes beat {
+
+  @keyframes pulse {
     0%, 100% {
       transform: rotate(-45deg) scale(1);
+      filter: drop-shadow(0 0 10px #ff5a8c);
     }
     50% {
-      transform: rotate(-45deg) scale(1.2);
+      transform: rotate(-45deg) scale(1.3);
+      filter: drop-shadow(0 0 30px #ff2a6d);
     }
   }
+
+  /* Love message styling */
   .message {
-    position: absolute;
-    top: 120px;
-    width: 100%;
-    text-align: center;
+    max-width: 600px;
     font-size: 1.3rem;
-    color: #d61c62;
-    font-weight: bold;
+    line-height: 1.6;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    padding: 25px 30px;
+    box-shadow: 0 0 25px #ff5a8caa;
+    user-select: none;
+  }
+
+  /* Floating hearts animation */
+  .floating-hearts {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .floating-hearts span {
+    position: absolute;
+    font-size: 24px;
+    color: #ff3b7f;
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    opacity: 0.8;
+  }
+  @keyframes floatUp {
+    0% {
+      transform: translateY(100vh) scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(-10vh) scale(1.5);
+      opacity: 0;
+    }
   }
 </style>
 </head>
 <body>
-  <div class="heart" title="Lakshi loves you sooo much!">
-    <div></div>
+  <div class="floating-hearts" id="hearts-container"></div>
+
+  <div class="heart" title="Lakshi loves you sooo much!"><div></div></div>
+
+  <div class="message">
+    My dearest love,<br><br>
+    Every moment spent thinking of you fills my heart with endless joy.  
+    You are the sparkle in my day, the warmth in my night,  
+    and the sweetest dream I never want to wake from.<br><br>
+    This page is a tiny window into the huge love I carry for you—  
+    growing stronger with every beat of this heart.<br><br>
+    Lakshi loves you sooo much, more than words could ever say! 💖<br><br>
+    Forever yours,<br>
+    Your baby 💞
   </div>
-  <div class="message">Lakshi loves you sooo much 💖</div>
+
+<script>
+  // Function to create floating hearts randomly
+  const heartsContainer = document.getElementById('hearts-container');
+
+  function createHeart() {
+    const heart = document.createElement('span');
+    heart.innerHTML = '❤️';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (12 + Math.random() * 24) + 'px';
+    heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+    heart.style.animationDelay = '0s';
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => {
+      heartsContainer.removeChild(heart);
+    }, 7000);
+  }
+
+  // Create hearts continuously
+  setInterval(createHeart, 400);
+</script>
 </body>
 </html>
